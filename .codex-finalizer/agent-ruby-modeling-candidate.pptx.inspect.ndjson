@@ -1,0 +1,96 @@
+{"kind":"deck","id":"pr/ydftkd","name":"Deck"}
+{"kind":"layout","layoutId":"e7e0f896-a36f-43ed-8dd9-ead4bfdf8769","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"d72ffdac-96a2-4428-a74d-dd7481987cec","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/tt9mu5","slide":1,"title":"Agent 自动化遍历 Ruby Modeling 性能优化","textShapes":62}
+{"kind":"textbox","id":"sh/ytof2lcb","slide":1,"text":"Agent 自动化遍历 Ruby Modeling 性能优化","textPreview":"Agent 自动化遍历 Ruby Modeling 性能优化","textChars":30,"textLines":1,"bbox":[42,18,1196,45]}
+{"kind":"shape","id":"sh/lwzyd0bm","slide":1,"bbox":[34,70,1210,0]}
+{"kind":"textbox","id":"sh/kvqx4vu1","slide":1,"text":"固定硬件边界 → 自动生成候选配置 → GKB / lmbench 验证 → 学习迭代 → 收敛固化","textPreview":"固定硬件边界 → 自动生成候选配置 → GKB / lmbench 验证 → 学习迭代 → 收敛固化","textChars":50,"textLines":1,"bbox":[52,80,930,42]}
+{"kind":"textbox","id":"sh/7yhgfats","slide":1,"text":"非侵入式","textPreview":"非侵入式","textChars":4,"textLines":1,"bbox":[1008,86,104,28]}
+{"kind":"textbox","id":"sh/6x8z65c7","slide":1,"text":"自动收敛","textPreview":"自动收敛","textChars":4,"textLines":1,"bbox":[1122,86,110,28]}
+{"kind":"shape","id":"sh/t0zyh0by","slide":1,"bbox":[34,137,268,420]}
+{"kind":"textbox","id":"sh/8zqh8fud","slide":1,"text":"① 受控配置输入","textPreview":"① 受控配置输入","textChars":8,"textLines":1,"bbox":[54,151,228,30]}
+{"kind":"shape","id":"sh/n2xg36to","slide":1,"bbox":[54,185,228,0]}
+{"kind":"textbox","id":"sh/m14fu1c3","slide":1,"text":"人工确认项与 Agent 搜索空间严格分离","textPreview":"人工确认项与 Agent 搜索空间严格分离","textChars":21,"textLines":1,"bbox":[54,194,228,42]}
+{"kind":"shape","id":"sh/0nilw361","slide":1,"bbox":[54,244,228,72]}
+{"kind":"textbox","id":"sh/lor2p8nm","slide":1,"text":"FIXED","textPreview":"FIXED","textChars":5,"textLines":1,"bbox":[66,255,74,28]}
+{"kind":"textbox","id":"sh/yl03utob","slide":1,"text":"硬件 Modeling","textPreview":"硬件 Modeling","textChars":11,"textLines":1,"bbox":[148,250,122,26]}
+{"kind":"textbox","id":"sh/zm9kny5w","slide":1,"text":"拓扑、协议、时钟、安全边界","textPreview":"拓扑、协议、时钟、安全边界","textChars":13,"textLines":1,"bbox":[66,280,204,25]}
+{"kind":"shape","id":"sh/8bil036d","slide":1,"bbox":[54,330,228,48]}
+{"kind":"textbox","id":"sh/9cb2t8ny","slide":1,"text":"P-core","textPreview":"P-core","textChars":6,"textLines":1,"bbox":[64,340,66,28]}
+{"kind":"textbox","id":"sh/m903ydo7","slide":1,"text":"性能核专属 Ruby 参数","textPreview":"性能核专属 Ruby 参数","textChars":13,"textLines":1,"bbox":[138,335,132,38]}
+{"kind":"shape","id":"sh/na9kri5s","slide":1,"bbox":[54,388,228,48]}
+{"kind":"textbox","id":"sh/ofy1oj69","slide":1,"text":"E-core","textPreview":"E-core","textChars":6,"textLines":1,"bbox":[64,398,66,28]}
+{"kind":"textbox","id":"sh/pg72hone","slide":1,"text":"能效核专属 Ruby 参数","textPreview":"能效核专属 Ruby 参数","textChars":13,"textLines":1,"bbox":[138,393,132,38]}
+{"kind":"shape","id":"sh/50fq5gv6","slide":1,"bbox":[54,446,228,48]}
+{"kind":"textbox","id":"sh/kz69wbul","slide":1,"text":"Shared","textPreview":"Shared","textChars":6,"textLines":1,"bbox":[64,456,66,28]}
+{"kind":"textbox","id":"sh/jyx836d0","slide":1,"text":"L3 / SNF / Network 共享参数","textPreview":"L3 / SNF / Network 共享参数","textChars":23,"textLines":1,"bbox":[138,451,132,38]}
+{"kind":"textbox","id":"sh/ixoru1cf","slide":1,"text":"YAML：manual-confirmed / search-space / baseline","textPreview":"YAML：manual-confirmed / search-space / baseline","textChars":47,"textLines":1,"bbox":[54,510,228,32]}
+{"kind":"shape","id":"sh/t4za90b2","slide":1,"bbox":[320,137,606,420]}
+{"kind":"textbox","id":"sh/s3q90vux","slide":1,"text":"② Loop Agent 闭环优化","textPreview":"② Loop Agent 闭环优化","textChars":17,"textLines":1,"bbox":[340,151,566,30]}
+{"kind":"shape","id":"sh/r2xs7qtc","slide":1,"bbox":[340,185,566,0]}
+{"kind":"textbox","id":"sh/61orylcr","slide":1,"text":"GKB","textPreview":"GKB","textChars":3,"textLines":1,"bbox":[740,153,74,28]}
+{"kind":"textbox","id":"sh/1szad0be","slide":1,"text":"lmbench","textPreview":"lmbench","textChars":7,"textLines":1,"bbox":[822,153,84,28]}
+{"kind":"textbox","id":"sh/grq94vut","slide":1,"text":"同一流程适配单核 / 多核；按 core_scope 选择 P-core、E-core、Shared 或 Mixed","textPreview":"同一流程适配单核 / 多核；按 core_scope 选择 P-core、E-core、Shared 或 Mixed","textChars":58,"textLines":1,"bbox":[340,191,566,26]}
+{"kind":"shape","id":"sh/ydknyxsb","slide":1,"bbox":[340,235,166,78]}
+{"kind":"textbox","id":"sh/zetor2tw","slide":1,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[352,248,34,34]}
+{"kind":"textbox","id":"sh/0f2p07ah","slide":1,"text":"生成候选","textPreview":"生成候选","textChars":4,"textLines":1,"bbox":[394,244,102,24]}
+{"kind":"textbox","id":"sh/lgb6tcbm","slide":1,"text":"基于历史最优与禁区\n批量采样 Ruby 配置","textPreview":"基于历史最优与禁区 | 批量采样 Ruby 配置","textChars":22,"textLines":2,"bbox":[394,266,102,42]}
+{"kind":"shape","id":"sh/mhk72xs7","slide":1,"bbox":[540,235,166,78]}
+{"kind":"textbox","id":"sh/n2tov2ts","slide":1,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[552,248,34,34]}
+{"kind":"textbox","id":"sh/832p47ad","slide":1,"text":"门禁检查","textPreview":"门禁检查","textChars":4,"textLines":1,"bbox":[594,244,102,24]}
+{"kind":"textbox","id":"sh/94v6xcry","slide":1,"text":"约束合法性 + Smoke\n失败即记录并学习","textPreview":"约束合法性 + Smoke | 失败即记录并学习","textChars":22,"textLines":2,"bbox":[594,266,102,42]}
+{"kind":"shape","id":"sh/a5476hsj","slide":1,"bbox":[740,235,166,78]}
+{"kind":"textbox","id":"sh/v6dozm94","slide":1,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[752,248,34,34]}
+{"kind":"textbox","id":"sh/jm9ojm18","slide":1,"text":"性能测试","textPreview":"性能测试","textChars":4,"textLines":1,"bbox":[794,244,102,24]}
+{"kind":"textbox","id":"sh/i10nqhkn","slide":1,"text":"运行测试矩阵\n采集性能与仿真成本","textPreview":"运行测试矩阵 | 采集性能与仿真成本","textChars":16,"textLines":2,"bbox":[794,266,102,42]}
+{"kind":"shape","id":"sh/5or6lcjy","slide":1,"bbox":[506,274,34,0]}
+{"kind":"shape","id":"sh/4ni5sr2t","slide":1,"bbox":[706,274,34,0]}
+{"kind":"shape","id":"sh/rq9onm14","slide":1,"bbox":[740,347,166,78]}
+{"kind":"textbox","id":"sh/6p07uhkj","slide":1,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[752,360,34,34]}
+{"kind":"textbox","id":"sh/dsb6pwja","slide":1,"text":"指标解析","textPreview":"指标解析","textChars":4,"textLines":1,"bbox":[794,356,102,24]}
+{"kind":"textbox","id":"sh/sr2pwr2p","slide":1,"text":"Score / HW 误差 /\n稳定性 / 资源代价","textPreview":"Score / HW 误差 / | 稳定性 / 资源代价","textChars":26,"textLines":2,"bbox":[794,378,102,42]}
+{"kind":"shape","id":"sh/7upob2l0","slide":1,"bbox":[540,347,166,78]}
+{"kind":"textbox","id":"sh/mtgnixkf","slide":1,"text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[552,360,34,34]}
+{"kind":"textbox","id":"sh/cnutwze1","slide":1,"text":"模型更新","textPreview":"模型更新","textChars":4,"textLines":1,"bbox":[594,356,102,24]}
+{"kind":"textbox","id":"sh/do3u54vm","slide":1,"text":"更新参数重要度\n探索有效区、规避禁区","textPreview":"更新参数重要度 | 探索有效区、规避禁区","textChars":18,"textLines":2,"bbox":[594,378,102,42]}
+{"kind":"shape","id":"sh/qlsbupwv","slide":1,"bbox":[340,347,166,78]}
+{"kind":"textbox","id":"sh/bm1c3udg","slide":1,"text":"6","textPreview":"6","textChars":1,"textLines":1,"bbox":[352,360,34,34]}
+{"kind":"textbox","id":"sh/ozatsze5","slide":1,"text":"收敛判断","textPreview":"收敛判断","textChars":4,"textLines":1,"bbox":[394,356,102,24]}
+{"kind":"textbox","id":"sh/p0ju1kva","slide":1,"text":"收益、预算、连续无改善\n满足条件后自动停止","textPreview":"收益、预算、连续无改善 | 满足条件后自动停止","textChars":21,"textLines":2,"bbox":[394,378,102,42]}
+{"kind":"shape","id":"sh/2xsbqpwz","slide":1,"bbox":[706,386,34,0]}
+{"kind":"shape","id":"sh/3y1czuxk","slide":1,"bbox":[506,386,34,0]}
+{"kind":"shape","id":"sh/8ved4je9","slide":1,"bbox":[823,313,0,34]}
+{"kind":"textbox","id":"sh/9wnudovu","slide":1,"text":"未收敛：下一轮","textPreview":"未收敛：下一轮","textChars":7,"textLines":1,"bbox":[354,445,142,28]}
+{"kind":"shape","id":"sh/hcjuxony","slide":1,"bbox":[505,459,164,0]}
+{"kind":"textbox","id":"sh/wbatoj6d","slide":1,"text":"已收敛：完整验证 + 重复测试","textPreview":"已收敛：完整验证 + 重复测试","textChars":15,"textLines":1,"bbox":[678,445,214,28]}
+{"kind":"textbox","id":"sh/va1cve5s","slide":1,"text":"输出：最终 Ruby 配置 + 最优参数组合 + 失败禁区 + 完整可追溯实验记录","textPreview":"输出：最终 Ruby 配置 + 最优参数组合 + 失败禁区 + 完整可追溯实验记录","textChars":41,"textLines":1,"bbox":[350,491,546,40]}
+{"kind":"shape","id":"sh/u9sbm9o7","slide":1,"bbox":[944,137,300,420]}
+{"kind":"textbox","id":"sh/98zut4nm","slide":1,"text":"③ Dashboard 实时观测","textPreview":"③ Dashboard 实时观测","textChars":16,"textLines":1,"bbox":[964,151,260,30]}
+{"kind":"shape","id":"sh/87qtkz6h","slide":1,"bbox":[964,185,260,0]}
+{"kind":"textbox","id":"sh/76hcru5w","slide":1,"text":"Agent 只输出标准事件；服务统一校验、存储与展示","textPreview":"Agent 只输出标准事件；服务统一校验、存储与展示","textChars":26,"textLines":1,"bbox":[964,194,260,30]}
+{"kind":"textbox","id":"sh/ml8bi9ob","slide":1,"text":"JSON\n事件","textPreview":"JSON | 事件","textChars":7,"textLines":2,"bbox":[964,236,72,55]}
+{"kind":"textbox","id":"sh/lkzup4nq","slide":1,"text":"SQLite\n+ API","textPreview":"SQLite | + API","textChars":12,"textLines":2,"bbox":[1057,236,72,55]}
+{"kind":"textbox","id":"sh/kjqtgz65","slide":1,"text":"实时\nDashboard","textPreview":"实时 | Dashboard","textChars":12,"textLines":2,"bbox":[1150,236,74,55]}
+{"kind":"shape","id":"sh/ap4rq543","slide":1,"bbox":[1036,263.5,21,0]}
+{"kind":"shape","id":"sh/bqx8jalo","slide":1,"bbox":[1129,263.5,21,0]}
+{"kind":"textbox","id":"sh/cr69svm9","slide":1,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[966,322,22,22]}
+{"kind":"textbox","id":"sh/xcfal03e","slide":1,"text":"当前阶段","textPreview":"当前阶段","textChars":4,"textLines":1,"bbox":[998,314,92,36]}
+{"kind":"textbox","id":"sh/2l4rml4r","slide":1,"text":"测试 / 学习 / 验证","textPreview":"测试 / 学习 / 验证","textChars":12,"textLines":1,"bbox":[1091,314,129,36]}
+{"kind":"shape","id":"sh/nmd8fqlc","slide":1,"bbox":[998,353,222,0]}
+{"kind":"textbox","id":"sh/onm9ovmx","slide":1,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[966,367,22,22]}
+{"kind":"textbox","id":"sh/povqh03i","slide":1,"text":"优化趋势","textPreview":"优化趋势","textChars":4,"textLines":1,"bbox":[998,359,92,36]}
+{"kind":"textbox","id":"sh/ehkril4v","slide":1,"text":"总体 + Case 梯度","textPreview":"总体 + Case 梯度","textChars":12,"textLines":1,"bbox":[1091,359,129,36]}
+{"kind":"shape","id":"sh/fid8bqlg","slide":1,"bbox":[998,398,222,0]}
+{"kind":"textbox","id":"sh/36xkzy18","slide":1,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[966,412,22,22]}
+{"kind":"textbox","id":"sh/iloj6tkn","slide":1,"text":"遍历覆盖","textPreview":"遍历覆盖","textChars":4,"textLines":1,"bbox":[998,404,92,36]}
+{"kind":"textbox","id":"sh/58f21oje","slide":1,"text":"P / E / Shared 参数域","textPreview":"P / E / Shared 参数域","textChars":18,"textLines":1,"bbox":[1091,404,129,36]}
+{"kind":"shape","id":"sh/47618j2t","slide":1,"bbox":[998,443,222,0]}
+{"kind":"textbox","id":"sh/vidkve1c","slide":1,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[966,457,22,22]}
+{"kind":"textbox","id":"sh/uh4j29kr","slide":1,"text":"运行状态","textPreview":"运行状态","textChars":4,"textLines":1,"bbox":[998,449,92,36]}
+{"kind":"textbox","id":"sh/hkf2xoj2","slide":1,"text":"构建、Trial、失败原因","textPreview":"构建、Trial、失败原因","textChars":13,"textLines":1,"bbox":[1091,449,129,36]}
+{"kind":"textbox","id":"sh/gj614j2x","slide":1,"text":"最终 Champion 配置可直接固化","textPreview":"最终 Champion 配置可直接固化","textChars":19,"textLines":1,"bbox":[964,505,260,28]}
+{"kind":"shape","id":"sh/fehk7i1g","slide":1,"bbox":[34,578,1210,112]}
+{"kind":"textbox","id":"sh/ed83edkv","slide":1,"text":"方案价值","textPreview":"方案价值","textChars":4,"textLines":1,"bbox":[64,594,128,33]}
+{"kind":"textbox","id":"sh/cjih8fid","slide":1,"text":"在不修改 gem5 主工程的前提下，把 Ruby 配置探索从“人工试参”升级为可约束、可追溯、会收敛的 Agent 自动优化闭环。","textPreview":"在不修改 gem5 主工程的前提下，把 Ruby 配置探索从“人工试参”升级为可约束、可追溯、会收敛的 Agent 自动优化闭环。","textChars":65,"textLines":1,"bbox":[194,590,1018,40]}
+{"kind":"textbox","id":"sh/xkby10zy","slide":1,"text":"D9300 P-core / E-core 独立建模 ｜ GKB / lmbench 统一接入 ｜ CI/CD 并行执行 ｜ Dashboard 实时呈现 ｜ 达到收敛条件自动停止","textPreview":"D9300 P-core / E-core 独立建模 ｜ GKB / lmbench 统一接入 ｜ CI/CD 并行执行 ｜ Dashboard 实时呈现 ｜ 达到收敛条件自动停止","textChars":90,"textLines":1,"bbox":[194,632,1018,38]}
+{"kind":"notes","id":"nt/tt9mu5","slide":1,"text":"内容依据 gem5-lab 当前非侵入式 Loop Agent 方案整理；视觉风格参考既有 OpenNPUX 架构与 Modeling 路线材料。所有流程节点均为可编辑 PowerPoint 原生形状。参考文件：/Users/libo/Work/gem5/ppt_out/opennpux-npu-pipe-roadmap.pptx"}

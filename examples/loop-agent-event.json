@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "event_id": "exp-example-trial-000-progress-001",
+  "experiment_id": "exp-example",
+  "event_type": "TRIAL_PROGRESS",
+  "emitted_at": "2026-09-15T12:00:00Z",
+  "payload": {
+    "trial_id": "exp-example-i000-t000",
+    "stage": "GKB_QUICK_TEST",
+    "progress": 0.5,
+    "progress_detail": {
+      "current_case": "compression",
+      "completed_cases": 2,
+      "total_cases": 4,
+      "latest_score": 1084.2,
+      "message": "Running GKB compression case"
+    }
+  }
+}

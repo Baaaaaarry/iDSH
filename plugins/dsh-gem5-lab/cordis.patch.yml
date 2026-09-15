@@ -1,0 +1,8 @@
+- insert:
+    - id: gem5-lab-tools
+      name: dsh-gem5-lab
+      config:
+        projectRoot: !!js process.env.GEM5_LAB_ROOT
+        pythonExecutable: !!js process.env.GEM5_LAB_PYTHON
+        dashboardUrl: !!js process.env.GEM5_LAB_DASHBOARD_URL
+        commandTimeoutMs: 86400000

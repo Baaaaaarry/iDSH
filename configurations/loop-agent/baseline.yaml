@@ -1,0 +1,155 @@
+schema_version: 1
+experiment:
+  name: d9300-ruby-optimization
+  gem5_source: /Users/libo/Work/gem5
+  gem5_commit: REPLACE_WITH_COMMIT
+  ruby_protocol: CHI
+  random_seed: 20260915
+
+configuration_files:
+  manual_confirmed: manual-confirmed.yaml
+  search_space: search-space.yaml
+
+execution:
+  # single_core runs one selected logical CPU. multi_core runs the supplied set.
+  mode: single_core                 # single_core | multi_core
+  core_scope: p_core                # p_core | e_core | shared | mixed
+  cpu_affinity: [0]                 # Host or target logical CPU IDs
+  simulated_core_ids: [0]           # gem5 CPU IDs participating in the workload
+  threads: 1
+  parallel_trials: 1
+  warmup_runs: 1
+  measured_repetitions: 3
+  timeout_seconds: 21600
+
+baseline_parameters:
+  # Populate these maps only after manual-confirmed.yaml is approved.
+  p_core: {}
+  e_core: {}
+  shared: {}
+
+benchmark:
+  # Select exactly one profile: gkb or lmbench.
+  active: gkb
+  profiles:
+    gkb:
+      kind: gkb
+      input_method: executable_cases
+      working_directory: REPLACE_WITH_GKB_WORKDIR
+      environment: {}
+      cases:
+        - id: crypto
+          executable: REPLACE_WITH_GKB_CRYPTO_BINARY
+          argv: []
+          stdin: null
+          weight: 1.0
+        - id: compression
+          executable: REPLACE_WITH_GKB_COMPRESSION_BINARY
+          argv: []
+          stdin: null
+          weight: 1.0
+        - id: navigation
+          executable: REPLACE_WITH_GKB_NAVIGATION_BINARY
+          argv: []
+          stdin: null
+          weight: 1.0
+        - id: image_processing
+          executable: REPLACE_WITH_GKB_IMAGE_PROCESSING_BINARY
+          argv: []
+          stdin: null
+          weight: 1.0
+      parser:
+        format: json_or_regex
+        score_field: score
+        score_regex: 'score\s*[:=]\s*([0-9.]+)'
+        direction: maximize
+      aggregate:
+        method: weighted_geometric_mean
+
+    lmbench:
+      kind: lmbench
+      input_method: command_matrix
+      working_directory: REPLACE_WITH_LMBENCH_BIN_DIR
+      environment:
+        ENOUGH: "100000"
+        TIMING_O: "0"
+      tests:
+        - id: lat_mem_rd
+          executable: ./lat_mem_rd
+          argument_matrix:
+            - ["64", "64"]
+            - ["64", "128"]
+            - ["64", "512"]
+            - ["64", "1024"]
+          metric: latency_ns
+          direction: minimize
+          weight: 1.0
+        - id: bw_mem_rd
+          executable: ./bw_mem
+          argument_matrix:
+            - ["64m", "rd"]
+          metric: bandwidth_mib_s
+          direction: maximize
+          weight: 1.0
+        - id: bw_mem_cp
+          executable: ./bw_mem
+          argument_matrix:
+            - ["64m", "cp"]
+          metric: bandwidth_mib_s
+          direction: maximize
+          weight: 1.0
+        - id: lat_ctx
+          executable: ./lat_ctx
+          # For multi_core, threads/process counts must not exceed execution.threads
+          argument_matrix:
+            - ["-s", "0", "2", "4", "8"]
+          metric: latency_us
+          direction: minimize
+          weight: 0.5
+        - id: lat_syscall
+          executable: ./lat_syscall
+          argument_matrix:
+            - ["null"]
+            - ["read"]
+          metric: latency_us
+          direction: minimize
+          weight: 0.25
+      parser:
+        format: lmbench_text
+        reject_non_numeric: true
+      aggregate:
+        method: weighted_normalized_geometric_mean
+        normalize_against: hardware_reference
+
+hardware_reference:
+  source: REPLACE_WITH_D9300_MEASUREMENT_FILE
+  required_dimensions: [benchmark_id, case_or_test_id, execution_mode, core_scope, threads]
+  missing_reference_policy: block_trial
+
+objective:
+  priority: [correctness, hardware_fidelity, stability, performance, simulation_cost]
+  hardware_error_metric: weighted_mape
+  performance_metric: benchmark_profile_defined
+  weights:
+    p_core: null                    # Required for mixed/multi-core experiments
+    e_core: null
+    shared: null
+
+stop_conditions:
+  max_trials: 200
+  max_iterations: 20
+  patience_rounds: 8
+  min_relative_improvement: 0.002
+  target_hardware_mape: 0.075
+  max_case_regression: 0.03
+  stability_repetitions: 3
+  max_cv: 0.02
+  require_full_validation: true
+
+artifacts:
+  output_directory: ../../var/experiments
+  preserve_trial_config: true
+  preserve_stdout: true
+  preserve_stderr: true
+  preserve_stats: true
+

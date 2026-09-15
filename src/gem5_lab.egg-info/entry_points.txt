@@ -1,0 +1,2 @@
+[console_scripts]
+gem5-lab = gem5_lab.cli:main

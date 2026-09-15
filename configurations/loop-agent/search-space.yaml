@@ -1,0 +1,70 @@
+schema_version: 1
+profile: d9300-ruby-search
+
+policy:
+  require_fixed_baseline: true
+  reject_unconfirmed_parameters: true
+  max_changed_parameters_per_trial: 3
+  allow_cross_core_value_copy: false
+  unknown_parameter_policy: reject
+
+# P-core and E-core are intentionally separate. Equal parameter names do not
+# imply equal values, ranges, or final configurations.
+dimensions:
+  p_core:
+    - {path: p_core.l1i.dataAccessLatency, unit: cycle, status: SEARCH_DIRECT, values: [1, 2, 3, 4], requires_manual_approval: true}
+    - {path: p_core.l1i.tagAccessLatency, unit: cycle, status: SEARCH_DIRECT, values: [1, 2, 3, 4], requires_manual_approval: true}
+    - {path: p_core.l1d.dataAccessLatency, unit: cycle, status: SEARCH_DIRECT, values: [1, 2, 3, 4, 5], requires_manual_approval: true}
+    - {path: p_core.l1d.tagAccessLatency, unit: cycle, status: SEARCH_DIRECT, values: [1, 2, 3, 4], requires_manual_approval: true}
+    - {path: p_core.l2.dataAccessLatency, unit: cycle, status: SEARCH_DIRECT, values: [4, 6, 8, 10, 12], requires_manual_approval: true}
+    - {path: p_core.l2.tagAccessLatency, unit: cycle, status: SEARCH_DIRECT, values: [2, 4, 6, 8], requires_manual_approval: true}
+    - {path: p_core.controller.number_of_TBEs, unit: count, status: SEARCH_DIRECT, values: [16, 32, 64, 128], requires_manual_approval: true}
+    - {path: p_core.controller.transitions_per_cycle, unit: count, status: SEARCH_DIRECT, values: [4, 8, 16, 32], requires_manual_approval: true}
+    - {path: p_core.sequencer.max_outstanding_requests, unit: count, status: SEARCH_DIRECT, values: [8, 16, 32, 64], requires_manual_approval: true}
+    - {path: p_core.message_buffers.buffer_size, unit: count, status: SEARCH_DIRECT, values: [16, 32, 64, 128], requires_manual_approval: true}
+    - {path: p_core.prefetcher.degree, unit: count, status: SEARCH_CONSTRAINED, values: [1, 2, 4, 8], requires_manual_approval: true, when: {p_core.prefetcher.enabled: true}}
+    - {path: p_core.prefetcher.distance, unit: cache_line, status: SEARCH_CONSTRAINED, values: [1, 2, 4, 8, 16], requires_manual_approval: true, when: {p_core.prefetcher.enabled: true}}
+
+  e_core:
+    - {path: e_core.l1i.dataAccessLatency, unit: cycle, status: SEARCH_DIRECT, values: [1, 2, 3, 4, 5], requires_manual_approval: true}
+    - {path: e_core.l1i.tagAccessLatency, unit: cycle, status: SEARCH_DIRECT, values: [1, 2, 3, 4], requires_manual_approval: true}
+    - {path: e_core.l1d.dataAccessLatency, unit: cycle, status: SEARCH_DIRECT, values: [1, 2, 3, 4, 5, 6], requires_manual_approval: true}
+    - {path: e_core.l1d.tagAccessLatency, unit: cycle, status: SEARCH_DIRECT, values: [1, 2, 3, 4, 5], requires_manual_approval: true}
+    - {path: e_core.l2.dataAccessLatency, unit: cycle, status: SEARCH_DIRECT, values: [6, 8, 10, 12, 16], requires_manual_approval: true}
+    - {path: e_core.l2.tagAccessLatency, unit: cycle, status: SEARCH_DIRECT, values: [3, 4, 6, 8, 10], requires_manual_approval: true}
+    - {path: e_core.controller.number_of_TBEs, unit: count, status: SEARCH_DIRECT, values: [8, 16, 32, 64], requires_manual_approval: true}
+    - {path: e_core.controller.transitions_per_cycle, unit: count, status: SEARCH_DIRECT, values: [2, 4, 8, 16], requires_manual_approval: true}
+    - {path: e_core.sequencer.max_outstanding_requests, unit: count, status: SEARCH_DIRECT, values: [4, 8, 16, 32], requires_manual_approval: true}
+    - {path: e_core.message_buffers.buffer_size, unit: count, status: SEARCH_DIRECT, values: [8, 16, 32, 64], requires_manual_approval: true}
+    - {path: e_core.prefetcher.degree, unit: count, status: SEARCH_CONSTRAINED, values: [1, 2, 4], requires_manual_approval: true, when: {e_core.prefetcher.enabled: true}}
+    - {path: e_core.prefetcher.distance, unit: cache_line, status: SEARCH_CONSTRAINED, values: [1, 2, 4, 8], requires_manual_approval: true, when: {e_core.prefetcher.enabled: true}}
+
+  shared:
+    - {path: shared.l3.dataAccessLatency, unit: cycle, status: SEARCH_DIRECT, values: [10, 14, 18, 22, 26], requires_manual_approval: true}
+    - {path: shared.l3.tagAccessLatency, unit: cycle, status: SEARCH_DIRECT, values: [6, 8, 10, 12], requires_manual_approval: true}
+    - {path: shared.hnf.number_of_TBEs, unit: count, status: SEARCH_DIRECT, values: [64, 128, 256, 512], requires_manual_approval: true}
+    - {path: shared.snf.number_of_TBEs, unit: count, status: SEARCH_DIRECT, values: [32, 64, 128, 256], requires_manual_approval: true}
+    - {path: shared.network.link_latency, unit: cycle, status: SEARCH_DIRECT, values: [1, 2, 3, 4], requires_manual_approval: true}
+    - {path: shared.network.router_latency, unit: cycle, status: SEARCH_DIRECT, values: [1, 2, 3, 4], requires_manual_approval: true}
+    - {path: shared.network.link_width_bits, unit: bit, status: SEARCH_CONSTRAINED, values: [64, 128, 256], requires_manual_approval: true}
+    - {path: shared.network.vcs_per_vnet, unit: count, status: SEARCH_CONSTRAINED, values: [1, 2, 4, 8], requires_manual_approval: true, when: {shared.network.model: garnet}}
+    - {path: shared.network.buffers_per_data_vc, unit: count, status: SEARCH_CONSTRAINED, values: [2, 4, 8, 16], requires_manual_approval: true, when: {shared.network.model: garnet}}
+
+constraints:
+  - id: fixed-values-immutable
+    rule: Candidate must not change FIXED_MANUAL, FIXED_SYSTEM, GUARDRAIL, or PENDING_MANUAL_CONFIRMATION parameters.
+  - id: core-scope-isolation
+    rule: P-core and E-core parameters are independent and may only be changed by a trial whose core_scope includes that class.
+  - id: cache-geometry
+    rule: Cache size, associativity, bank count, and block size must form an integral legal geometry.
+  - id: network-geometry
+    rule: Router, link, vnet, VC, flit width, and topology settings must be jointly legal.
+  - id: bounded-batch
+    rule: A trial may change at most policy.max_changed_parameters_per_trial parameters.
+
+stages:
+  - {id: private-cache-controller, scopes: [p_core, e_core], allow_joint_p_e_search: false}
+  - {id: prefetcher, scopes: [p_core, e_core], allow_joint_p_e_search: false}
+  - {id: shared-cache-network, scopes: [shared], allow_joint_p_e_search: false}
+  - {id: constrained-joint-refinement, scopes: [p_core, e_core, shared], allow_joint_p_e_search: true}
+

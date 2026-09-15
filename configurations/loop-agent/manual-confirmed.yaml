@@ -1,0 +1,91 @@
+schema_version: 1
+profile: d9300
+description: Manual source of truth for fixed D9300 Ruby parameters.
+
+# Only the user or hardware-modeling owner may change PENDING_MANUAL_CONFIRMATION
+# to FIXED_MANUAL. A Loop Agent must never edit this file.
+ownership:
+  owner: hardware_modeling
+  agent_write_allowed: false
+  unconfirmed_policy: block_search
+
+core_classes:
+  p_core:
+    description: D9300 performance core private Ruby hierarchy
+    instances: []          # Example: [0, 1]
+    parameters:
+      l1i.size: {value: null, unit: byte, status: PENDING_MANUAL_CONFIRMATION}
+      l1i.assoc: {value: null, unit: ways, status: PENDING_MANUAL_CONFIRMATION}
+      l1i.dataAccessLatency: {value: null, unit: cycle, status: PENDING_MANUAL_CONFIRMATION}
+      l1i.tagAccessLatency: {value: null, unit: cycle, status: PENDING_MANUAL_CONFIRMATION}
+      l1d.size: {value: null, unit: byte, status: PENDING_MANUAL_CONFIRMATION}
+      l1d.assoc: {value: null, unit: ways, status: PENDING_MANUAL_CONFIRMATION}
+      l1d.dataAccessLatency: {value: null, unit: cycle, status: PENDING_MANUAL_CONFIRMATION}
+      l1d.tagAccessLatency: {value: null, unit: cycle, status: PENDING_MANUAL_CONFIRMATION}
+      l2.size: {value: null, unit: byte, status: PENDING_MANUAL_CONFIRMATION}
+      l2.assoc: {value: null, unit: ways, status: PENDING_MANUAL_CONFIRMATION}
+      l2.dataAccessLatency: {value: null, unit: cycle, status: PENDING_MANUAL_CONFIRMATION}
+      l2.tagAccessLatency: {value: null, unit: cycle, status: PENDING_MANUAL_CONFIRMATION}
+      controller.data_channel_size: {value: null, unit: byte, status: PENDING_MANUAL_CONFIRMATION}
+      controller.number_of_TBEs: {value: null, unit: count, status: PENDING_MANUAL_CONFIRMATION}
+      sequencer.max_outstanding_requests: {value: null, unit: count, status: PENDING_MANUAL_CONFIRMATION}
+
+  e_core:
+    description: D9300 efficiency core private Ruby hierarchy
+    instances: []          # Example: [2, 3, 4, 5]
+    parameters:
+      l1i.size: {value: null, unit: byte, status: PENDING_MANUAL_CONFIRMATION}
+      l1i.assoc: {value: null, unit: ways, status: PENDING_MANUAL_CONFIRMATION}
+      l1i.dataAccessLatency: {value: null, unit: cycle, status: PENDING_MANUAL_CONFIRMATION}
+      l1i.tagAccessLatency: {value: null, unit: cycle, status: PENDING_MANUAL_CONFIRMATION}
+      l1d.size: {value: null, unit: byte, status: PENDING_MANUAL_CONFIRMATION}
+      l1d.assoc: {value: null, unit: ways, status: PENDING_MANUAL_CONFIRMATION}
+      l1d.dataAccessLatency: {value: null, unit: cycle, status: PENDING_MANUAL_CONFIRMATION}
+      l1d.tagAccessLatency: {value: null, unit: cycle, status: PENDING_MANUAL_CONFIRMATION}
+      l2.size: {value: null, unit: byte, status: PENDING_MANUAL_CONFIRMATION}
+      l2.assoc: {value: null, unit: ways, status: PENDING_MANUAL_CONFIRMATION}
+      l2.dataAccessLatency: {value: null, unit: cycle, status: PENDING_MANUAL_CONFIRMATION}
+      l2.tagAccessLatency: {value: null, unit: cycle, status: PENDING_MANUAL_CONFIRMATION}
+      controller.data_channel_size: {value: null, unit: byte, status: PENDING_MANUAL_CONFIRMATION}
+      controller.number_of_TBEs: {value: null, unit: count, status: PENDING_MANUAL_CONFIRMATION}
+      sequencer.max_outstanding_requests: {value: null, unit: count, status: PENDING_MANUAL_CONFIRMATION}
+
+  shared:
+    description: D9300 shared L3/HNF/SNF/network/memory hierarchy
+    parameters:
+      l3.size: {value: null, unit: byte, status: PENDING_MANUAL_CONFIRMATION}
+      l3.assoc: {value: null, unit: ways, status: PENDING_MANUAL_CONFIRMATION}
+      l3.dataAccessLatency: {value: null, unit: cycle, status: PENDING_MANUAL_CONFIRMATION}
+      hnf.number_of_TBEs: {value: null, unit: count, status: PENDING_MANUAL_CONFIRMATION}
+      snf.number_of_TBEs: {value: null, unit: count, status: PENDING_MANUAL_CONFIRMATION}
+      network.topology: {value: null, unit: enum, status: PENDING_MANUAL_CONFIRMATION}
+      network.link_width_bits: {value: null, unit: bit, status: PENDING_MANUAL_CONFIRMATION}
+      network.number_of_virtual_networks: {value: null, unit: count, status: PENDING_MANUAL_CONFIRMATION}
+      memory.type: {value: null, unit: enum, status: PENDING_MANUAL_CONFIRMATION}
+
+fixed_system_patterns:
+  status: FIXED_SYSTEM
+  paths:
+    - "*.type"
+    - "*.system"
+    - "*.children"
+    - "*.eventq_index"
+    - "*.in_port"
+    - "*.out_port"
+    - "*.request_port"
+    - "*.response_port"
+    - "*.addr_ranges"
+    - "*.cluster_id"
+    - "*.router_id"
+    - "*.link_id"
+
+guardrail_patterns:
+  status: GUARDRAIL
+  paths:
+    - "*.deadlock_threshold"
+    - "*.garnet_deadlock_threshold"
+    - "*.enable_fault_model"
+    - "*.network_fault_model"
+    - "*.randomization"
+    - "*.allow_zero_latency"
+

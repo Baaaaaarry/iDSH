@@ -1,0 +1,35 @@
+{
+  "name": "GKB Ruby autonomous optimization demo",
+  "gem5": {
+    "source": "/Users/libo/Work/gem5",
+    "commit": "7a5fcdcdeb"
+  },
+  "baseline_score": 1000.0,
+  "batch_size": 12,
+  "seed": 20260907,
+  "cases": ["crypto", "compression", "navigation", "image-processing"],
+  "search_space": [
+    {"name": "network", "values": ["simple", "garnet"]},
+    {"name": "cache_line_size", "values": [64, 128]},
+    {"name": "l1d_size", "values": ["32KiB", "64KiB"]},
+    {"name": "l1d_assoc", "values": [4, 8]},
+    {"name": "l2_size", "values": ["1MiB", "2MiB", "4MiB"]},
+    {"name": "l2_assoc", "values": [8, 16]},
+    {"name": "l2_banks", "values": [1, 2, 4, 8]},
+    {"name": "vcs_per_vnet", "values": [1, 2, 4, 8], "when": {"network": "garnet"}},
+    {"name": "ni_flit_size", "values": [8, 16, 32], "when": {"network": "garnet"}},
+    {"name": "buffers_per_data_vc", "values": [2, 4, 8], "when": {"network": "garnet"}},
+    {"name": "router_latency", "values": [1, 2, 3], "when": {"network": "garnet"}}
+  ],
+  "stop": {
+    "max_trials": 240,
+    "max_iterations": 20,
+    "min_relative_improvement": 0.002,
+    "patience": 5,
+    "target_hardware_mape": 0.075,
+    "target_performance_improvement": 0.115,
+    "max_case_regression": 0.03,
+    "max_cv": 0.012
+  }
+}
+
