@@ -67,6 +67,9 @@ the installation/build/profile setup commands with `CI=true`, which is DSH's
 documented path for skipping contributor-only hook setup. This also covers the
 dependency-status check that pnpm may run automatically before `pnpm run
 build`; the resulting DSH runtime itself is started without `CI=true`.
+`scripts/start.sh` invokes the built `apps/cli/lib/bin.js` DSH launcher directly
+instead of `pnpm dsh`, so normal startup never causes pnpm to reinstall the
+submodule or rerun its contributor-only postinstall.
 
 - DSH Web UI: `http://127.0.0.1:3080`
 - Ruby optimization dashboard: `http://127.0.0.1:18080`
