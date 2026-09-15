@@ -55,13 +55,13 @@ cd "$dsh_dir"
 # pinned dependency rather than a DSH contributor worktree, so use the
 # upstream-supported CI path to skip contributor-only Lefthook installation.
 CI=true "${pnpm_command[@]}" install --frozen-lockfile
-"${pnpm_command[@]}" run build
+CI=true "${pnpm_command[@]}" run build
 
 export DSH_HOME="$dsh_home"
 export GEM5_LAB_ROOT="$project_dir"
 export GEM5_LAB_PYTHON="$project_dir/.venv/bin/python"
 export GEM5_LAB_DASHBOARD_URL="http://127.0.0.1:18080"
-"${pnpm_command[@]}" dsh --profile gem5-lab --from-default-profile web --dump-config >/dev/null
-"${pnpm_command[@]}" dsh plugin --profile gem5-lab add "file:$project_dir/plugins/dsh-gem5-lab"
+CI=true "${pnpm_command[@]}" dsh --profile gem5-lab --from-default-profile web --dump-config >/dev/null
+CI=true "${pnpm_command[@]}" dsh plugin --profile gem5-lab add "file:$project_dir/plugins/dsh-gem5-lab"
 
 echo "Installation complete. Run: $project_dir/scripts/start.sh"
