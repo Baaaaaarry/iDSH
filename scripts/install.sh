@@ -49,7 +49,12 @@ fi
 "$venv_python" -m pip install --no-build-isolation -e "$project_dir"
 
 cd "$dsh_dir"
-"${pnpm_command[@]}" install --frozen-lockfile
+# DSH's contributor postinstall configures worktree-local Git hooks. In a Git
+# submodule, Git necessarily stores core.worktree in the common module config,
+# which that installer intentionally refuses to migrate. This checkout is a
+# pinned dependency rather than a DSH contributor worktree, so use the
+# upstream-supported CI path to skip contributor-only Lefthook installation.
+CI=true "${pnpm_command[@]}" install --frozen-lockfile
 "${pnpm_command[@]}" run build
 
 export DSH_HOME="$dsh_home"

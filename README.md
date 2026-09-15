@@ -60,6 +60,12 @@ different version before touching the lockfile. Do not set
 `COREPACK_ENABLE_PROJECT_SPEC=0`; doing so may select pnpm 10 and trigger
 `ERR_PNPM_LOCKFILE_CONFIG_MISMATCH` for the upstream patched dependencies.
 
+The DSH checkout is a pinned Git submodule, not a contributor worktree. Its
+common module config must contain `core.worktree`, so the upstream Lefthook
+postinstall deliberately refuses to migrate it. `scripts/install.sh` runs only
+the dependency installation with `CI=true`, which is DSH's documented path for
+skipping contributor-only hook setup; the subsequent DSH build runs normally.
+
 - DSH Web UI: `http://127.0.0.1:3080`
 - Ruby optimization dashboard: `http://127.0.0.1:18080`
 
