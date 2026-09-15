@@ -3,7 +3,11 @@ set -euo pipefail
 
 project_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 dsh_dir="$project_dir/third_party/deepseek-harness"
-pnpm_bin="${PNPM_BIN:-pnpm}"
+if [[ -n "${PNPM_BIN:-}" ]]; then
+  pnpm_command=("$PNPM_BIN")
+else
+  pnpm_command=(corepack pnpm)
+fi
 mkdir -p "$project_dir/.run"
 
 if [[ -f "$project_dir/.env" ]]; then
@@ -41,5 +45,5 @@ curl -fsS "http://$dashboard_host:$dashboard_port/api/health" >/dev/null
 echo "gem5-lab Dashboard: http://$dashboard_host:$dashboard_port"
 echo "DeepSeek Harness:   http://${DSH_HOST:-127.0.0.1}:${DSH_PORT:-3080}"
 cd "$dsh_dir"
-COREPACK_ENABLE_PROJECT_SPEC=0 "$pnpm_bin" dsh --profile gem5-lab --no-open \
+"${pnpm_command[@]}" dsh --profile gem5-lab --no-open \
   --host "${DSH_HOST:-127.0.0.1}" --port "${DSH_PORT:-3080}"

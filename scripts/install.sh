@@ -4,13 +4,24 @@ set -euo pipefail
 project_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 dsh_dir="$project_dir/third_party/deepseek-harness"
 dsh_home="$project_dir/.dsh-home"
-pnpm_bin="${PNPM_BIN:-pnpm}"
+if [[ -n "${PNPM_BIN:-}" ]]; then
+  pnpm_command=("$PNPM_BIN")
+else
+  pnpm_command=(corepack pnpm)
+fi
 
 node_major="$(node -p 'process.versions.node.split(".")[0]')"
 node_minor="$(node -p 'process.versions.node.split(".")[1]')"
 if (( node_major < 22 || (node_major == 22 && node_minor < 19) )); then
   echo "DeepSeek Harness requires Node.js 22.19+ or 24+." >&2
   exit 1
+fi
+
+pnpm_version="$(cd "$dsh_dir" && "${pnpm_command[@]}" --version)"
+if [[ "$pnpm_version" != "11.7.0" ]]; then
+  echo "DeepSeek Harness pins pnpm 11.7.0, but resolved pnpm $pnpm_version." >&2
+  echo "Enable Corepack or set PNPM_BIN to a pnpm 11.7.0 executable." >&2
+  exit 4
 fi
 
 if [[ ! -x "$dsh_dir/node_modules/.bin/tsx" ]]; then
@@ -38,14 +49,14 @@ fi
 "$venv_python" -m pip install --no-build-isolation -e "$project_dir"
 
 cd "$dsh_dir"
-COREPACK_ENABLE_PROJECT_SPEC=0 "$pnpm_bin" install --frozen-lockfile
-COREPACK_ENABLE_PROJECT_SPEC=0 "$pnpm_bin" run build
+"${pnpm_command[@]}" install --frozen-lockfile
+"${pnpm_command[@]}" run build
 
 export DSH_HOME="$dsh_home"
 export GEM5_LAB_ROOT="$project_dir"
 export GEM5_LAB_PYTHON="$project_dir/.venv/bin/python"
 export GEM5_LAB_DASHBOARD_URL="http://127.0.0.1:18080"
-COREPACK_ENABLE_PROJECT_SPEC=0 "$pnpm_bin" dsh --profile gem5-lab --from-default-profile web --dump-config >/dev/null
-COREPACK_ENABLE_PROJECT_SPEC=0 "$pnpm_bin" dsh plugin --profile gem5-lab add "file:$project_dir/plugins/dsh-gem5-lab"
+"${pnpm_command[@]}" dsh --profile gem5-lab --from-default-profile web --dump-config >/dev/null
+"${pnpm_command[@]}" dsh plugin --profile gem5-lab add "file:$project_dir/plugins/dsh-gem5-lab"
 
 echo "Installation complete. Run: $project_dir/scripts/start.sh"

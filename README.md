@@ -55,6 +55,11 @@ to the current `scripts/install.sh` and rerun it. The installer now bootstraps
 internal mirror, set `PIP_INDEX_URL` before running the script; do not install
 the backend into the Conda base environment.
 
+DSH pins pnpm `11.7.0`. The installer invokes `corepack pnpm` and rejects a
+different version before touching the lockfile. Do not set
+`COREPACK_ENABLE_PROJECT_SPEC=0`; doing so may select pnpm 10 and trigger
+`ERR_PNPM_LOCKFILE_CONFIG_MISMATCH` for the upstream patched dependencies.
+
 - DSH Web UI: `http://127.0.0.1:3080`
 - Ruby optimization dashboard: `http://127.0.0.1:18080`
 
