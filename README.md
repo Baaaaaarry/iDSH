@@ -49,6 +49,12 @@ Start the DSH Web UI and optimization dashboard together:
 ./scripts/start.sh
 ```
 
+If Python installation reports `Cannot import 'setuptools.build_meta'`, update
+to the current `scripts/install.sh` and rerun it. The installer now bootstraps
+`setuptools` inside the project venv before the editable install. For an
+internal mirror, set `PIP_INDEX_URL` before running the script; do not install
+the backend into the Conda base environment.
+
 - DSH Web UI: `http://127.0.0.1:3080`
 - Ruby optimization dashboard: `http://127.0.0.1:18080`
 

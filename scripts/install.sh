@@ -23,7 +23,19 @@ fi
 
 git -C "$project_dir" submodule update --init --recursive
 python3 -m venv "$project_dir/.venv"
-"$project_dir/.venv/bin/pip" install --no-build-isolation -e "$project_dir"
+venv_python="$project_dir/.venv/bin/python"
+
+# Python 3.12+ virtual environments may contain pip without setuptools.  The
+# project uses setuptools.build_meta, so install the backend before disabling
+# build isolation.  PIP_INDEX_URL/PIP_EXTRA_INDEX_URL remain user-configurable.
+"$venv_python" -m ensurepip --upgrade
+if ! "$venv_python" -m pip install --upgrade "setuptools>=68" wheel; then
+  echo "Failed to install the Python build backend (setuptools.build_meta)." >&2
+  echo "Check PIP_INDEX_URL, proxy, DNS, and TLS settings, then rerun install.sh." >&2
+  exit 3
+fi
+"$venv_python" -c "import setuptools.build_meta"
+"$venv_python" -m pip install --no-build-isolation -e "$project_dir"
 
 cd "$dsh_dir"
 COREPACK_ENABLE_PROJECT_SPEC=0 "$pnpm_bin" install --frozen-lockfile
